@@ -12,13 +12,12 @@ public class LimeLight {
     public double tx;
     public double ty;
     public double ta;
-
     public LimeLight(HardwareMap hwMap) {
 
         limelight = hwMap.get(Limelight3A.class, "limelight");
 
         limelight.setPollRateHz(100);
-        limelight.pipelineSwitch(0);
+        limelight.pipelineSwitch(1);
         limelight.start();
     }
 
@@ -76,5 +75,64 @@ public class LimeLight {
         }
 
         return 0;
+    }
+
+    public boolean detectPollen() {
+        LLResult llResult = limelight.getLatestResult();
+
+        if (llResult != null && llResult.isValid()) {
+            List<LLResultTypes.DetectorResult> objects = llResult.getDetectorResults();
+            for (LLResultTypes.DetectorResult object : objects) {
+                if (object.getClassName().equals("yellow_pollen")) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+//    public double pollenDistance() {
+//        LLResult llResult = limelight.getLatestResult();
+//
+//        if (pollen = true) {
+//            List<LLResultTypes.DetectorResult> objects = llResult.getDetectorResults();
+//            for (LLResultTypes.DetectorResult object : objects) {
+//                if(object.getClassName().equals("yellow_pollen")) {
+//                    px = object.getTargetXPixels();
+//                    pa = object.getTargetXDegrees();
+//                }
+//            }
+//        }
+//        return 0;
+//    }
+
+    public double pollenX() {
+        LLResult llResult = limelight.getLatestResult();
+
+        if (llResult != null && llResult.isValid()) {
+            for (LLResultTypes.DetectorResult object : llResult.getDetectorResults()) {
+                if (object.getClassName().equals("yellow_pollen")) {
+                    return object.getTargetXDegrees();
+                }
+            }
+        }
+        return 0;
+    }
+
+    public double pollenA() {
+        LLResult llResult = limelight.getLatestResult();
+
+        if (llResult != null && llResult.isValid()) {
+            for (LLResultTypes.DetectorResult object : llResult.getDetectorResults()) {
+                if (object.getClassName().equals("yellow_pollen")) {
+                    return object.getTargetArea();
+                }
+            }
+        }
+        return 0;
+    }
+
+    public void pipelineSwitch(int pipeline) {
+        limelight.pipelineSwitch(pipeline);
     }
 }

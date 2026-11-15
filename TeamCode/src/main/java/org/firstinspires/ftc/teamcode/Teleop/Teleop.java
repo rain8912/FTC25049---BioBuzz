@@ -1,50 +1,121 @@
 package org.firstinspires.ftc.teamcode.Teleop;
 
-import com.qualcomm.hardware.limelightvision.LLResult;
-import com.qualcomm.hardware.limelightvision.Limelight3A;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.HardwareMap;
 
-import org.firstinspires.ftc.teamcode.Vision.LimeLight;
+//import org.firstinspires.ftc.teamcode.Sensor.IntakeSensorDetector;
+//import org.firstinspires.ftc.teamcode.Sensor.BreakBeam;
+import org.firstinspires.ftc.teamcode.Servo.TransferGate;
+import org.firstinspires.ftc.teamcode.Teleop.Subsystems.Intake;
+import org.firstinspires.ftc.teamcode.Teleop.Subsystems.MechDrive;
+import org.firstinspires.ftc.teamcode.Teleop.Subsystems.Shooter;
 
+@Config
 @TeleOp(name="Shooter ctrl test")
 public class Teleop extends OpMode {
-//    private shooter shooter;
-//    private boolean RB = false;
-//    private boolean shooterOn = false;
-    private LimeLight limeLight;
+    private Shooter shooter;
+    private boolean circle, RB, LB = false;
+    private boolean shooterOn, intakeOn, outtakeOn = false;
+    private MechDrive mechDrive;
+    private Intake intake;
+    private TransferGate gate;
+//    private BreakBeam breakBeam;
+//    private LimeLight limeLight;
+//    private IntakeSensorDetector colourSensor;
 
     @Override
     public void init() {
-//        shooter = new shooter(hardwareMap);
-        limeLight = new LimeLight(hardwareMap);
+        shooter = new Shooter(hardwareMap);
+        mechDrive = new MechDrive(hardwareMap);
+        intake = new Intake(hardwareMap);
+        gate = new TransferGate(hardwareMap);
+//        breakBeam = new BreakBeam(hardwareMap);
+//        colourSensor = new IntakeSensorDetector(hardwareMap);
+//        limeLight = new LimeLight(hardwareMap);
+//        limeLight.pipelineSwitch(1);
     }
 
     public void loop() {
-//        if(gamepad1.right_bumper && !RB) {
-//            shooterOn = !shooterOn;
-//
-//            RB = true;
-//
-//            if (shooterOn) {
-//                shooter.startshoot();
-//            } else {
-//                shooter.stopshoot();
-//            }
-//        }
-//
-//        if (!gamepad1.right_bumper) {
-//            RB = false;
+
+        mechDrive.drive(gamepad1);
+
+
+        if(gamepad1.circle && !circle) {
+            shooterOn = !shooterOn;
+            circle = true;
+
+            if (shooterOn) {
+                shooter.startShoot();
+                gate.GateOpen();
+            } else {
+                shooter.stopshoot();
+                gate.GateClose();
+            }
+        }
+        circle = gamepad1.circle;
+
+//        if (breakBeam.isBeam4Broken() && breakBeam.isBeam3Broken() && breakBeam.isBeam2Broken() && breakBeam.isBeam1Broken()) {
+//            intakeOn = false;
 //        }
 
-        telemetry.addData("Tag Count", limeLight.getTagCount());
-        telemetry.addData("Target X", limeLight.aprilx());
-        telemetry.addData("Target Y", limeLight.aprily());
-        telemetry.addData("Target A", limeLight.aprila());
+        if(gamepad1.right_bumper && !RB) {
+            intakeOn = !intakeOn;
+            RB = true;
+
+            if(intakeOn) {
+                intake.StartIntake();
+                gate.GateClose();
+            } else {
+                intake.StopIntake();
+            }
+        }
+        RB = gamepad1.right_bumper;
+
+        if (gamepad1.left_bumper && !LB) {
+            outtakeOn = !outtakeOn;
+            LB = true;
+
+            if (outtakeOn) {
+                intake.StartOuttake();
+            } else {
+                intake.StopIntake();
+            }
+        }
+        LB = gamepad1.left_bumper;
+
+//        if (gamepad1.right_bumper && !RB) {
+//            gateOn = !gateOn;
+//            RB = true;
+//
+//            if(gateOn) {
+//                gate.GateOpen();
+//            } else {
+//                gate.GateClose();
+//            }
+//        }
+//        RB = gamepad1.right_bumper;
+
+
+//        if (gamepad1.right_bumper) {
+//            limeLight.pipelineSwitch(0);
+//        }
+//
+//        if (gamepad1.left_bumper) {
+//            limeLight.pipelineSwitch(1);
+//        }
+
+
+
+//        telemetry.addData("Tag Count", limeLight.getTagCount());
+//        telemetry.addData("Target X", limeLight.aprilx());
+//        telemetry.addData("Target Y", limeLight.aprily());
+//        telemetry.addData("Target A", limeLight.aprila());
+//        telemetry.addData("Pollen Detection", limeLight.detectPollen());
+//        telemetry.addData("pollen X", limeLight.pollenX());
+//        telemetry.addData("pollen A", limeLight.pollenA());
+//        telemetry.addData("Intake Pollen Detected", colourSensor.detectedPollen(telemetry));
+
 
         telemetry.update();
     }
