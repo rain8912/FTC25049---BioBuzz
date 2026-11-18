@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.Teleop;
 import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 //import org.firstinspires.ftc.teamcode.Sensor.IntakeSensorDetector;
 //import org.firstinspires.ftc.teamcode.Sensor.BreakBeam;
@@ -15,14 +16,16 @@ import org.firstinspires.ftc.teamcode.Teleop.Subsystems.Shooter;
 @TeleOp(name="Shooter ctrl test")
 public class Teleop extends OpMode {
     private Shooter shooter;
-    private boolean circle, RB, LB = false;
-    private boolean shooterOn, intakeOn, outtakeOn = false;
+    private boolean circle, RB, LB, bCross = false;
+    private boolean shooterOn, intakeOn, outtakeOn, transfer = false;
+    private boolean gateOpened = true;
     private MechDrive mechDrive;
     private Intake intake;
     private TransferGate gate;
 //    private BreakBeam breakBeam;
 //    private LimeLight limeLight;
 //    private IntakeSensorDetector colourSensor;
+    private final ElapsedTime revTimer = new ElapsedTime();
 
     @Override
     public void init() {
@@ -36,6 +39,10 @@ public class Teleop extends OpMode {
 //        limeLight.pipelineSwitch(1);
     }
 
+    public void start() {
+        gate.GateClose();
+    }
+
     public void loop() {
 
         mechDrive.drive(gamepad1);
@@ -47,13 +54,18 @@ public class Teleop extends OpMode {
 
             if (shooterOn) {
                 shooter.startShoot();
-                gate.GateOpen();
+                revTimer.reset();
+                gateOpened = false;
             } else {
                 shooter.stopshoot();
-                gate.GateClose();
             }
         }
         circle = gamepad1.circle;
+
+        if (shooterOn && !gateOpened && revTimer.milliseconds() >= 2000) {
+            gate.GateOpen();
+            gateOpened = true;
+        }
 
 //        if (breakBeam.isBeam4Broken() && breakBeam.isBeam3Broken() && breakBeam.isBeam2Broken() && breakBeam.isBeam1Broken()) {
 //            intakeOn = false;
@@ -65,7 +77,6 @@ public class Teleop extends OpMode {
 
             if(intakeOn) {
                 intake.StartIntake();
-                gate.GateClose();
             } else {
                 intake.StopIntake();
             }
@@ -115,7 +126,9 @@ public class Teleop extends OpMode {
 //        telemetry.addData("pollen X", limeLight.pollenX());
 //        telemetry.addData("pollen A", limeLight.pollenA());
 //        telemetry.addData("Intake Pollen Detected", colourSensor.detectedPollen(telemetry));
-
+//        telemetry.addData("gateOpened", gateOpened);
+//        telemetry.addData("shooterOn", shooterOn);
+//        telemetry.addData("revTimer (ms)", (int) revTimer.milliseconds());
 
         telemetry.update();
     }

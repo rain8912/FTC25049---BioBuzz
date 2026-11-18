@@ -20,8 +20,6 @@ public class LimeLight {
         limelight.pipelineSwitch(1);
         limelight.start();
     }
-
-
     public double aprilx() {
         LLResult llResult = limelight.getLatestResult();
 

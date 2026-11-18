@@ -4,6 +4,8 @@
     import com.qualcomm.robotcore.hardware.DcMotorEx;
     import com.qualcomm.robotcore.hardware.HardwareMap;
 
+    import org.opencv.core.Mat;
+
     //.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT) = keeps most speed if you drop power
 
     //Error = target velo - currentvelo
@@ -30,20 +32,21 @@
 
         private DcMotorEx motor;
 
-//        public double targetVelo = 0;
-//        public double targetAccel = 0;
-//
-//        public static class PIDFshooterConfig {
-//            public double kP = 0;
-//            public double kV = 0.0;
-//            public double kSF = 0.0;
-//            public double kA = 0.0;
-//
-//            public static double currentVelo;
-//            public double sgn = 0;
-//        }
-//
-//        public static PIDFshooterConfig sConfig = new PIDFshooterConfig();
+        public double targetVelo = 0;
+        public double targetAccel = 0;
+
+        @Config
+        public static class PIDFshooterConfig {
+            public double kP = 0;
+            public double kV = 0.0;
+            public double kSF = 0.0;
+            public double kA = 0.0;
+
+            public static double currentVelo;
+            public double sgn = 0;
+        }
+
+        public static PIDFshooterConfig sConfig = new PIDFshooterConfig();
         public Shooter(HardwareMap hardwareMap) {
             motor = hardwareMap.get(DcMotorEx.class, "shooterMotor");
             motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);

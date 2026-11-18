@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.Teleop.Subsystems;
 
 import com.acmerobotics.dashboard.config.Config;
+import com.qualcomm.hardware.gobilda.GoBildaPinpointDriver;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -11,6 +12,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 //Mecanum wheels are mounted 45 deg
 //y = forward/backward
@@ -55,6 +57,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 public class MechDrive {
 
     private DcMotorEx frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor;
+    private GoBildaPinpointDriver deadwheel;
 //    private IMU imu;
 //
 //    public double targetVelo = 0;
@@ -91,12 +94,16 @@ public class MechDrive {
         frontRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        deadwheel = hardwareMap.get(GoBildaPinpointDriver.class, "wheel");
+        deadwheel.setOffsets(0,0, DistanceUnit.METER);
+        deadwheel.setEncoderDirections(GoBildaPinpointDriver.EncoderDirection.FORWARD, GoBildaPinpointDriver.EncoderDirection.REVERSED);
     }
 
     public void drive(Gamepad gamepad1) {
 //        double targetVelo = -gamepad1.left_stick_y;
-        double y = -gamepad1.left_stick_y;
-        double x = gamepad1.left_stick_x * 1.1;
+        double y = -gamepad1.left_stick_x;
+        double x = gamepad1.left_stick_y * 1.1;
         double rx = gamepad1.right_stick_x;
 
 //        dConfig.currentPitch = imu.getRobotYawPitchRollAngles().getPitch(AngleUnit.DEGREES);

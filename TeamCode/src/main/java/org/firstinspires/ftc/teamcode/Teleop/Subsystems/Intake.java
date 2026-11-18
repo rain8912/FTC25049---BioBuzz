@@ -32,6 +32,6 @@ public class Intake {
 
     public void StartOuttake() {
         frontMotor.setPower(-1.0);
-        backMotor.setPower(-1.0);
+        backMotor.setPower(1.0);
     }
 }

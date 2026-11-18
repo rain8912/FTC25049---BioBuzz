@@ -1,20 +1,24 @@
 package org.firstinspires.ftc.teamcode.Servo;
 
+import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
+
+@Config
 public class TransferGate {
     private Servo gateServo;
 
     public static class GateConfig {
-        public double startPos = 0.6;
-        public double openPos = -0.4;
+        public double openPos = 0.5;
+        public double closePos = 0.0;
     }
 
     public static GateConfig gConfig = new GateConfig();
 
     public TransferGate(HardwareMap hardwareMap) {
         gateServo = hardwareMap.get(Servo.class, "gate");
+        gateServo.setDirection(Servo.Direction.REVERSE);
         gateServo.close();
     }
 
@@ -23,6 +27,6 @@ public class TransferGate {
     }
 
     public void GateClose() {
-        gateServo.setPosition(gConfig.startPos);
+        gateServo.setPosition(gConfig.closePos);
     }
 }
