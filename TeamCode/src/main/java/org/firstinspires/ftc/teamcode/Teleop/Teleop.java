@@ -13,7 +13,7 @@ import org.firstinspires.ftc.teamcode.Teleop.Subsystems.MechDrive;
 import org.firstinspires.ftc.teamcode.Teleop.Subsystems.Shooter;
 
 @Config
-@TeleOp(name="Shooter ctrl test")
+@TeleOp(name="Teleop")
 public class Teleop extends OpMode {
     private Shooter shooter;
     private boolean circle, RB, LB, bCross = false;

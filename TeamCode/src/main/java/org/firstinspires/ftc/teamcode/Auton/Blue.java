@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 //import org.firstinspires.ftc.teamcode.Servo.FlowerRamp;
 import org.firstinspires.ftc.teamcode.Teleop.Subsystems.Intake;
 import org.firstinspires.ftc.teamcode.Teleop.Subsystems.Shooter;
-import org.firstinspires.ftc.teamcode.Vision.LimeLight;
+import org.firstinspires.ftc.teamcode.Testing.Subsystems.LimeLight;
 
 //section 5 equal squares from each side: far left square aim at far right april tag
 //move from spawn to set position
