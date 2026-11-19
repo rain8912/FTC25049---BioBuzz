@@ -87,23 +87,23 @@ public class MechDrive {
 //        IMU.Parameters parameters = new IMU.Parameters(new RevHubOrientationOnRobot(RevHubOrientationOnRobot.LogoFacingDirection.UP, RevHubOrientationOnRobot.UsbFacingDirection.FORWARD));
 //        imu.initialize(parameters);
 
+        frontLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         frontRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-        backRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
         frontLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         frontRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        deadwheel = hardwareMap.get(GoBildaPinpointDriver.class, "wheel");
-        deadwheel.setOffsets(0,0, DistanceUnit.METER);
-        deadwheel.setEncoderDirections(GoBildaPinpointDriver.EncoderDirection.FORWARD, GoBildaPinpointDriver.EncoderDirection.REVERSED);
+//        deadwheel = hardwareMap.get(GoBildaPinpointDriver.class, "wheel");
+//        deadwheel.setOffsets(0,0, DistanceUnit.METER);
+//        deadwheel.setEncoderDirections(GoBildaPinpointDriver.EncoderDirection.FORWARD, GoBildaPinpointDriver.EncoderDirection.REVERSED);
     }
 
     public void drive(Gamepad gamepad1) {
 //        double targetVelo = -gamepad1.left_stick_y;
-        double y = -gamepad1.left_stick_x;
-        double x = gamepad1.left_stick_y * 1.1;
+        double y = -gamepad1.left_stick_y;
+        double x = gamepad1.left_stick_x * 1.1;
         double rx = gamepad1.right_stick_x;
 
 //        dConfig.currentPitch = imu.getRobotYawPitchRollAngles().getPitch(AngleUnit.DEGREES);

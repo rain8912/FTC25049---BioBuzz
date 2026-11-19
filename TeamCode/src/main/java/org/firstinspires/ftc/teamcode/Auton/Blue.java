@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 //import org.firstinspires.ftc.teamcode.Teleop.Subsystems.Shooter;
 //import org.firstinspires.ftc.teamcode.Sensor.BreakBeam;
-import org.firstinspires.ftc.teamcode.Servo.FlowerRamp;
+//import org.firstinspires.ftc.teamcode.Servo.FlowerRamp;
 import org.firstinspires.ftc.teamcode.Teleop.Subsystems.Intake;
 import org.firstinspires.ftc.teamcode.Teleop.Subsystems.Shooter;
 import org.firstinspires.ftc.teamcode.Vision.LimeLight;
@@ -29,7 +29,7 @@ public class Blue extends LinearOpMode {
         LimeLight limelight = new LimeLight(hardwareMap);
 //        BreakBeam breakbeam = new BreakBeam(hardwareMap);
         Intake intake = new Intake(hardwareMap);
-        FlowerRamp flowerRamp = new FlowerRamp(hardwareMap);
+//        FlowerRamp flowerRamp = new FlowerRamp(hardwareMap);
 
         limelight.pipelineSwitch(0);
 

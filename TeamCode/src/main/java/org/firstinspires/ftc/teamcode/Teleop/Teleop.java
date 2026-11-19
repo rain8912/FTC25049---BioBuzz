@@ -39,9 +39,9 @@ public class Teleop extends OpMode {
 //        limeLight.pipelineSwitch(1);
     }
 
-    public void start() {
-        gate.GateClose();
-    }
+//    public void start() {
+//        gate.GateClose();
+//    }
 
     public void loop() {
 
