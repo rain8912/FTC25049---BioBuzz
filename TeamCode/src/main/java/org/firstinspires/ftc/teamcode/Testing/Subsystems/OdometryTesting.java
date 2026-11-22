@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.Testing.Subsystems;
 
+import com.pedropathing.revhub.localizers.PinpointConfig;
 import com.qualcomm.hardware.gobilda.GoBildaPinpointDriver;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
@@ -12,13 +13,23 @@ public class OdometryTesting {
 
     private GoBildaPinpointDriver pinPointLocation;
 
+//    public static PinpointConfig localizerConfig = new PinpointConfig(c -> {
+//        c.name.set("pinpoint");
+//        c.podType.set(GoBildaPinpointDriver.GoBildaOdometryPods.goBILDA_4_BAR_POD);
+//        c.xPodOffset.set(0.5017178828322043);
+//        c.yPodOffset.set(1.752950563205509);
+//        c.xPodDirection.set(GoBildaPinpointDriver.EncoderDirection.REVERSED);
+//        c.yPodDirection.set(GoBildaPinpointDriver.EncoderDirection.FORWARD);
+//        c.globalDistanceUnit.set(DistanceUnit.INCH);
+//        c.offsetUnits.set(DistanceUnit.INCH);
+//    });
+
     public OdometryTesting(HardwareMap hardwareMap) {
 
         pinPointLocation = hardwareMap.get(GoBildaPinpointDriver.class, "pinpoint");
 
-        pinPointLocation.setOffsets(-60.667, -155.296, DistanceUnit.MM);
+        pinPointLocation.setOffsets(0.7286881274125708, -1.9257135466327817, DistanceUnit.MM);
         pinPointLocation.setEncoderResolution(GoBildaPinpointDriver.GoBildaOdometryPods.goBILDA_4_BAR_POD);
-        pinPointLocation.setEncoderDirections(GoBildaPinpointDriver.EncoderDirection.FORWARD, GoBildaPinpointDriver.EncoderDirection.FORWARD);
 
         pinPointLocation.resetPosAndIMU();
     }

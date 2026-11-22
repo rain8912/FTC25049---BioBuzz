@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 //import org.firstinspires.ftc.teamcode.Sensor.IntakeSensorDetector;
 //import org.firstinspires.ftc.teamcode.Sensor.BreakBeam;
+import org.firstinspires.ftc.teamcode.Servo.FlowerRamp;
 import org.firstinspires.ftc.teamcode.Servo.TransferGate;
 import org.firstinspires.ftc.teamcode.Teleop.Subsystems.Intake;
 import org.firstinspires.ftc.teamcode.Teleop.Subsystems.MechDrive;
@@ -16,12 +17,13 @@ import org.firstinspires.ftc.teamcode.Teleop.Subsystems.Shooter;
 @TeleOp(name="Teleop")
 public class Teleop extends OpMode {
     private Shooter shooter;
-    private boolean circle, RB, LB, bCross = false;
-    private boolean shooterOn, intakeOn, outtakeOn, transfer = false;
+    private boolean circle, RB, LB, bCross, bSqaure = false;
+    private boolean shooterOn, intakeOn, outtakeOn, transfer, ramp = false;
     private boolean gateOpened = true;
     private MechDrive mechDrive;
     private Intake intake;
     private TransferGate gate;
+    private FlowerRamp flowerRamp;
 //    private BreakBeam breakBeam;
 //    private LimeLight limeLight;
 //    private IntakeSensorDetector colourSensor;
@@ -33,15 +35,16 @@ public class Teleop extends OpMode {
         mechDrive = new MechDrive(hardwareMap);
         intake = new Intake(hardwareMap);
         gate = new TransferGate(hardwareMap);
+        flowerRamp = new FlowerRamp(hardwareMap);
 //        breakBeam = new BreakBeam(hardwareMap);
 //        colourSensor = new IntakeSensorDetector(hardwareMap);
 //        limeLight = new LimeLight(hardwareMap);
 //        limeLight.pipelineSwitch(1);
     }
 
-//    public void start() {
-//        gate.GateClose();
-//    }
+    public void start() {
+        gate.GateClose();
+    }
 
     public void loop() {
 
@@ -58,6 +61,7 @@ public class Teleop extends OpMode {
                 gateOpened = false;
             } else {
                 shooter.stopshoot();
+                gate.GateClose();
             }
         }
         circle = gamepad1.circle;
@@ -95,6 +99,14 @@ public class Teleop extends OpMode {
         }
         LB = gamepad1.left_bumper;
 
+        if (gamepad1.square) {
+            flowerRamp.closePos();
+        }
+
+        if (gamepad1.triangle) {
+            flowerRamp.openPos();
+        }
+
 //        if (gamepad1.right_bumper && !RB) {
 //            gateOn = !gateOn;
 //            RB = true;
@@ -129,6 +141,14 @@ public class Teleop extends OpMode {
 //        telemetry.addData("gateOpened", gateOpened);
 //        telemetry.addData("shooterOn", shooterOn);
 //        telemetry.addData("revTimer (ms)", (int) revTimer.milliseconds());
+        telemetry.addData("targetVelo", shooter.targetVelo);
+        telemetry.addData("targetAccel", shooter.targetAccel);
+        telemetry.addData("currentVelo", shooter.sConfig.currentVelo);
+        telemetry.addData("Kp", shooter.sConfig.kA);
+        telemetry.addData("Ka", shooter.sConfig.kA);
+        telemetry.addData("Ksf", shooter.sConfig.kSF);
+        telemetry.addData("Kv", shooter.sConfig.kV);
+        telemetry.addData("sgn", shooter.sConfig.sgn);
 
         telemetry.update();
     }

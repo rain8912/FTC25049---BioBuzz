@@ -10,7 +10,7 @@ public class TransferGate {
     private Servo gateServo;
 
     public static class GateConfig {
-        public double openPos = 0.5;
+        public double openPos = 0.9;
         public double closePos = 0.0;
     }
 

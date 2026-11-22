@@ -42,7 +42,7 @@
             public double kSF = 0.0;
             public double kA = 0.0;
 
-            public static double currentVelo;
+            public double currentVelo;
             public double sgn = 0;
         }
 
@@ -54,20 +54,20 @@
         }
 
         public void startShoot() {
-//            sConfig.currentVelo = motor.getVelocity();
-//
-//            if (targetVelo > 0) {
-//                sConfig.sgn = 1.0;
-//            } else if (targetVelo < 0) {
-//                sConfig.sgn = -1.0;
-//            }
-//
-//            double error = targetVelo - sConfig.currentVelo;
-//            double p = sConfig.kP * error;
-//            double ff = (sConfig.kV * targetVelo) + (sConfig.kA * targetAccel) + (sConfig.kSF * sConfig.sgn);
-//
-//            motor.setPower(p + ff);
-            motor.setPower(1.0);
+            sConfig.currentVelo = motor.getVelocity();
+
+            if (targetVelo > 0) {
+                sConfig.sgn = 1.0;
+            } else if (targetVelo < 0) {
+                sConfig.sgn = -1.0;
+            }
+
+            double error = targetVelo - sConfig.currentVelo;
+            double p = sConfig.kP * error;
+            double ff = (sConfig.kV * targetVelo) + (sConfig.kA * targetAccel) + (sConfig.kSF * sConfig.sgn);
+
+            motor.setPower(p + ff);
+//            motor.setPower(1.0);
 
         }
         public void stopshoot() {

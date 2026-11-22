@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.Auton;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 //import org.firstinspires.ftc.teamcode.Teleop.Subsystems.Shooter;
 //import org.firstinspires.ftc.teamcode.Sensor.BreakBeam;
@@ -21,27 +22,23 @@ import org.firstinspires.ftc.teamcode.Testing.Subsystems.LimeLight;
 //switchpipeline(1), memorize pollen positions
 
 @Autonomous (name = "blue", group = "Autonomous")
-public class Blue extends LinearOpMode {
+public class Blue extends OpMode {
 
-    public void runOpMode() {
+    @Override
+    public void init() {
 
-        Shooter shooter = new Shooter(hardwareMap);
-        LimeLight limelight = new LimeLight(hardwareMap);
-//        BreakBeam breakbeam = new BreakBeam(hardwareMap);
-        Intake intake = new Intake(hardwareMap);
-//        FlowerRamp flowerRamp = new FlowerRamp(hardwareMap);
+        Shooter shooter;
 
-        limelight.pipelineSwitch(0);
-
-        telemetry.addData("Initialize", "compelete");
-        telemetry.update();
+    }
 
 
-        waitForStart();
+    @Override
+    public void start() {
 
-        while (opModeIsActive()) {
+    }
 
-            shooter.startShoot();
-        }
+    @Override
+    public void loop() {
+
     }
 }
