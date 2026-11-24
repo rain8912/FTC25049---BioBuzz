@@ -1,15 +1,12 @@
 package org.firstinspires.ftc.teamcode.Auton;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 //import org.firstinspires.ftc.teamcode.Teleop.Subsystems.Shooter;
 //import org.firstinspires.ftc.teamcode.Sensor.BreakBeam;
 //import org.firstinspires.ftc.teamcode.Servo.FlowerRamp;
-import org.firstinspires.ftc.teamcode.Teleop.Subsystems.Intake;
 import org.firstinspires.ftc.teamcode.Teleop.Subsystems.Shooter;
-import org.firstinspires.ftc.teamcode.Testing.Subsystems.LimeLight;
 
 //section 5 equal squares from each side: far left square aim at far right april tag
 //move from spawn to set position

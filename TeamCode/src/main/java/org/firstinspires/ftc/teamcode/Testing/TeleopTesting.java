@@ -60,7 +60,7 @@ public class TeleopTesting extends OpMode {
                 revTimer.reset();
                 gateOpened = false;
             } else {
-                shooter.stopshoot();
+                shooter.stopShoot();
             }
         }
         circle = gamepad1.circle;

@@ -32,7 +32,7 @@
 
         private DcMotorEx motor;
 
-        public double targetVelo = 0;
+        public double currentVelo = 0;
         public double targetAccel = 0;
 
         @Config
@@ -42,7 +42,7 @@
             public double kSF = 0.0;
             public double kA = 0.0;
 
-            public double currentVelo;
+            public double targetVelo = 0;
             public double sgn = 0;
         }
 
@@ -54,23 +54,26 @@
         }
 
         public void startShoot() {
-            sConfig.currentVelo = motor.getVelocity();
+            currentVelo = motor.getVelocity();
 
-            if (targetVelo > 0) {
+            if (sConfig.targetVelo > 0) {
                 sConfig.sgn = 1.0;
-            } else if (targetVelo < 0) {
+            } else if (sConfig.targetVelo < 0) {
                 sConfig.sgn = -1.0;
+            } else {
+                sConfig.sgn = 0.0;
             }
 
-            double error = targetVelo - sConfig.currentVelo;
+            double error = sConfig.targetVelo - currentVelo;
             double p = sConfig.kP * error;
-            double ff = (sConfig.kV * targetVelo) + (sConfig.kA * targetAccel) + (sConfig.kSF * sConfig.sgn);
+            double ff = (sConfig.kV * sConfig.targetVelo) + (sConfig.kA * targetAccel) + (sConfig.kSF * sConfig.sgn);
 
             motor.setPower(p + ff);
 //            motor.setPower(1.0);
 
         }
-        public void stopshoot() {
+        public void stopShoot() {
             motor.setPower(0.0);
         }
     }
+

@@ -63,7 +63,7 @@ public class LLTrackingTesting {
         double columnWidth = (maxX - minX) / 5;
         int column = (int) ((x - minX) / columnWidth);
 
-        return Math.min(column, 5);
+        return Math.min(column, 4);
     }
 
     public int getRow(double y) {
@@ -71,19 +71,19 @@ public class LLTrackingTesting {
         double rowLength = (maxY - minY) / 5;
         int row = (int) ((y - minY) / rowLength);
 
-        return Math.min(row, 5);
+        return Math.min(row, 4);
     }
 
     public void FindTags(int[][] allianceTagID) {
 
-        if (row < 1 || row > 5 || row == 3) {
+        if (row < 0 || row > 4 || row == 3) {
             return;
         }
 
         targetID = -1;
         tx = 0;
 
-        int ID = allianceTagID[row - 1][column - 1];
+        int ID = allianceTagID[row][column];
 
         if (ID == 0) {
             return;

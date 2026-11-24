@@ -1,6 +1,8 @@
 package org.firstinspires.ftc.teamcode.Teleop;
 
+import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
+import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -31,6 +33,8 @@ public class Teleop extends OpMode {
 
     @Override
     public void init() {
+        telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
+
         shooter = new Shooter(hardwareMap);
         mechDrive = new MechDrive(hardwareMap);
         intake = new Intake(hardwareMap);
@@ -60,7 +64,7 @@ public class Teleop extends OpMode {
                 revTimer.reset();
                 gateOpened = false;
             } else {
-                shooter.stopshoot();
+                shooter.stopShoot();
                 gate.GateClose();
             }
         }
@@ -141,10 +145,9 @@ public class Teleop extends OpMode {
 //        telemetry.addData("gateOpened", gateOpened);
 //        telemetry.addData("shooterOn", shooterOn);
 //        telemetry.addData("revTimer (ms)", (int) revTimer.milliseconds());
-        telemetry.addData("targetVelo", shooter.targetVelo);
+        telemetry.addData("currentVelo", shooter.currentVelo);
         telemetry.addData("targetAccel", shooter.targetAccel);
-        telemetry.addData("currentVelo", shooter.sConfig.currentVelo);
-        telemetry.addData("Kp", shooter.sConfig.kA);
+        telemetry.addData("targetVelo", shooter.sConfig.targetVelo);
         telemetry.addData("Ka", shooter.sConfig.kA);
         telemetry.addData("Ksf", shooter.sConfig.kSF);
         telemetry.addData("Kv", shooter.sConfig.kV);

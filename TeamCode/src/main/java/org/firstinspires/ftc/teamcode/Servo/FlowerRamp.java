@@ -1,15 +1,17 @@
 package org.firstinspires.ftc.teamcode.Servo;
 
+import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
+@Config
 public class FlowerRamp {
 
     private Servo leftServo, rightServo;
 
     public static class Config {
-        public double openPos = 1.0;
-        public double closePos = 0.4;
+        public double openPos = 0.8;
+        public double closePos = 0.0;
     }
 
     public static Config fConfig = new Config();
