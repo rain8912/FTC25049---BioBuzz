@@ -54,6 +54,8 @@ public class Teleop extends OpMode {
 
         mechDrive.drive(gamepad1);
 
+        shooter.update();
+
 
         if(gamepad1.circle && !circle) {
             shooterOn = !shooterOn;
@@ -146,12 +148,14 @@ public class Teleop extends OpMode {
 //        telemetry.addData("shooterOn", shooterOn);
 //        telemetry.addData("revTimer (ms)", (int) revTimer.milliseconds());
         telemetry.addData("currentVelo", shooter.currentVelo);
-        telemetry.addData("targetAccel", shooter.targetAccel);
         telemetry.addData("targetVelo", shooter.sConfig.targetVelo);
-        telemetry.addData("Ka", shooter.sConfig.kA);
-        telemetry.addData("Ksf", shooter.sConfig.kSF);
-        telemetry.addData("Kv", shooter.sConfig.kV);
-        telemetry.addData("sgn", shooter.sConfig.sgn);
+        telemetry.addData("Kf", shooter.sConfig.kF);
+        telemetry.addData("Ks", shooter.sConfig.kS);
+        telemetry.addData("Kd", shooter.sConfig.kD);
+        telemetry.addData("Ki", shooter.sConfig.kI);
+        telemetry.addData("Kp", shooter.sConfig.kP);
+        telemetry.addData("rawTicks", shooter.getRawPosition());
+        telemetry.addData("loopHeartbeat", System.currentTimeMillis());
 
         telemetry.update();
     }
