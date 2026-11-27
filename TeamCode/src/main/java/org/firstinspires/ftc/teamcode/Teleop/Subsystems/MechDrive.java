@@ -57,7 +57,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 public class MechDrive {
 
     private DcMotorEx frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor;
-    private GoBildaPinpointDriver deadwheel;
+
 //    private IMU imu;
 //
 //    public double targetVelo = 0;

@@ -12,7 +12,8 @@ import org.firstinspires.ftc.teamcode.Teleop.Subsystems.Intake;
 import org.firstinspires.ftc.teamcode.Teleop.Subsystems.MechDrive;
 import org.firstinspires.ftc.teamcode.Teleop.Subsystems.Shooter;
 import org.firstinspires.ftc.teamcode.Testing.Subsystems.OdometryTesting;
-//import org.firstinspires.ftc.teamcode.Testing.Subsystems.ShooterTuning;
+import org.firstinspires.ftc.teamcode.Testing.Subsystems.ShooterTuning;
+import org.firstinspires.ftc.teamcode.Testing.Subsystems.ShooterTuning;
 
 @Config
 @TeleOp(name="Testing")
@@ -25,7 +26,7 @@ public class TeleopTesting extends OpMode {
     private Intake intake;
     private TransferGate gate;
     private OdometryTesting odometry;
-//    private ShooterTuning shooterTuning;
+    private ShooterTuning shooterTuning;
     //    private BreakBeam breakBeam;
 //    private LimeLight limeLight;
 //    private IntakeSensorDetector colourSensor;
@@ -38,7 +39,7 @@ public class TeleopTesting extends OpMode {
         intake = new Intake(hardwareMap);
         gate = new TransferGate(hardwareMap);
         odometry = new OdometryTesting(hardwareMap);
-//        shooterTuning = new ShooterTuning(hardwareMap);
+        shooterTuning = new ShooterTuning(hardwareMap);
 //        breakBeam = new BreakBeam(hardwareMap);
 //        colourSensor = new IntakeSensorDetector(hardwareMap);
 //        limeLight = new LimeLight(hardwareMap);
@@ -53,6 +54,7 @@ public class TeleopTesting extends OpMode {
 
         mechDrive.drive(gamepad1);
 
+        shooterTuning.update();
 
         if(gamepad1.circle && !circle) {
             shooterOn = !shooterOn;
@@ -128,13 +130,12 @@ public class TeleopTesting extends OpMode {
         telemetry.addData("odometry y", odometry.getY());
         telemetry.addData("heading", odometry.getHeading());
 
-//        telemetry.addData("currentVelo", shooterTuning.currentVelo);
-//        telemetry.addData("targetVelo", shooterTuning.sConfig.targetVelo);
-//        telemetry.addData("Kf", shooterTuning.sConfig.kF);
-//        telemetry.addData("Ks", shooterTuning.sConfig.kS);
-//        telemetry.addData("Ki", shooterTuning.sConfig.kI);
-//        telemetry.addData("Kd", shooterTuning.sConfig.kD);
-//        telemetry.addData("Kp", shooterTuning.sConfig.kP);
+        telemetry.addData("currentVelo", shooterTuning.currentVelo);
+        telemetry.addData("targetVelo", shooterTuning.sConfig.targetVelo);
+        telemetry.addData("Kf", shooterTuning.sConfig.kF);
+        telemetry.addData("Ks", shooterTuning.sConfig.kS);
+        telemetry.addData("Kd", shooterTuning.sConfig.kD);
+        telemetry.addData("Kp", shooterTuning.sConfig.kP);
 
         telemetry.update();
     }

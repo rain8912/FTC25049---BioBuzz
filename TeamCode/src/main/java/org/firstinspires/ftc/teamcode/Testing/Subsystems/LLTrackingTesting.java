@@ -76,7 +76,7 @@ public class LLTrackingTesting {
 
     public void FindTags(int[][] allianceTagID) {
 
-        if (row < 0 || row > 4 || row == 3) {
+        if (row < 0 || row > 4 || row == 2) {
             return;
         }
 

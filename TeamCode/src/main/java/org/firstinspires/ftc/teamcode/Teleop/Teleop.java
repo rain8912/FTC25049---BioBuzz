@@ -63,8 +63,8 @@ public class Teleop extends OpMode {
 
             if (shooterOn) {
                 shooter.startShoot();
-                revTimer.reset();
                 gateOpened = false;
+//                revTimer.reset();
             } else {
                 shooter.stopShoot();
                 gate.GateClose();
@@ -72,10 +72,14 @@ public class Teleop extends OpMode {
         }
         circle = gamepad1.circle;
 
-        if (shooterOn && !gateOpened && revTimer.milliseconds() >= 2000) {
+        if (shooterOn && !gateOpened && shooter.currentVelo >= shooter.rpmThreshold) {
             gate.GateOpen();
             gateOpened = true;
         }
+//        if (shooterOn && !gateOpened && revTimer.milliseconds() >= 2000) {
+//            gate.GateOpen();
+//            gateOpened = true;
+//        }
 
 //        if (breakBeam.isBeam4Broken() && breakBeam.isBeam3Broken() && breakBeam.isBeam2Broken() && breakBeam.isBeam1Broken()) {
 //            intakeOn = false;
@@ -152,10 +156,8 @@ public class Teleop extends OpMode {
         telemetry.addData("Kf", shooter.sConfig.kF);
         telemetry.addData("Ks", shooter.sConfig.kS);
         telemetry.addData("Kd", shooter.sConfig.kD);
-        telemetry.addData("Ki", shooter.sConfig.kI);
         telemetry.addData("Kp", shooter.sConfig.kP);
-        telemetry.addData("rawTicks", shooter.getRawPosition());
-        telemetry.addData("loopHeartbeat", System.currentTimeMillis());
+//        telemetry.addData("Ki", shooter.sConfig.kI);
 
         telemetry.update();
     }

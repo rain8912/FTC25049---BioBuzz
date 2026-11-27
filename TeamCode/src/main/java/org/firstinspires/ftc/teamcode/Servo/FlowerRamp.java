@@ -10,8 +10,8 @@ public class FlowerRamp {
     private Servo leftServo, rightServo;
 
     public static class Config {
-        public double openPos = 0.8;
-        public double closePos = 0.0;
+        public double upPos = 0.8;
+        public double downPos = 0.0;
     }
 
     public static Config fConfig = new Config();
@@ -24,13 +24,13 @@ public class FlowerRamp {
         rightServo.setDirection(Servo.Direction.REVERSE);
     }
 
-    public void openPos() {
-        leftServo.setPosition(fConfig.openPos);
-        rightServo.setPosition(fConfig.openPos);
+    public void OpenPos() {
+        leftServo.setPosition(fConfig.upPos);
+        rightServo.setPosition(fConfig.upPos);
     }
 
-    public void closePos() {
-        leftServo.setPosition(fConfig.closePos);
-        rightServo.setPosition(fConfig.closePos);
+    public void DownPos() {
+        leftServo.setPosition(fConfig.downPos);
+        rightServo.setPosition(fConfig.downPos);
     }
 }

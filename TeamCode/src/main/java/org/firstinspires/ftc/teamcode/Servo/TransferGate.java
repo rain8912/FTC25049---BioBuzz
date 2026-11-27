@@ -11,7 +11,7 @@ public class TransferGate {
 
     public static class GateConfig {
         public double openPos = 0.9;
-        public double closePos = 0.2;
+        public double closePos = 0.1;
     }
 
     public static GateConfig gConfig = new GateConfig();
